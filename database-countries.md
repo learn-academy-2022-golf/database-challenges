@@ -49,14 +49,78 @@ AND indepyear > 1945
 
 ORDER BY
 Which fifteen countries have the lowest life expectancy? (HINT: starts with Zambia, ends with Sierra Leonne)
+
+SELECT name, lifeexpectancy
+FROM country
+WHERE lifeexpectancy IS NOT null
+ORDER BY lifeexpectancy ASC
+LIMIT 15;
+
+
 Which fifteen countries have the highest life expectancy? (HINT: starts with Andorra, ends with Spain)
+
+SELECT name, lifeexpectancy
+FROM country
+WHERE lifeexpectancy IS NOT null
+ORDER BY lifeexpectancy DESC
+LIMIT 15
+
+
 Which five countries have the lowest population density (density = population / surfacearea)? (HINT: starts with Greenland)
+
+SELECT name, population, surfacearea,
+population / surfacearea AS population_density
+FROM country
+WHERE population != 0
+ORDER BY population_density
+LIMIT 5
+
+
 Which countries have the highest population density?(HINT: starts with Macao)
+
+SELECT name, population, surfacearea,
+population / surfacearea AS population_density
+FROM country
+WHERE population != 0
+ORDER BY population_density DESC
+LIMIT 5
+
+
 Which is the smallest country by area? (HINT: .4)
+
+SELECT name, surfacearea
+FROM country
+ORDER BY surfacearea
+--Holy See (Vatican City State)
+
 Which is the smallest country by population? (HINT: 50)?
+
+SELECT name, population
+FROM country
+WHERE population != 0
+ORDER BY population 
+
+
 Which is the biggest country by area? (HINT: 1.70754e+07)
+
+SELECT name, surfacearea
+FROM country
+ORDER BY surfacearea DESC
+
 Which is the biggest country by population? (HINT: 1277558000)
+
+SELECT name, population
+FROM country
+WHERE population != 0
+ORDER BY population DESC
+
+
 Who is the most influential head of state measured by population? (HINT: Jiang Zemin)
+
+SELECT name, population, headofstate
+FROM country
+WHERE population != 0
+ORDER BY population DESC
 
 
 
