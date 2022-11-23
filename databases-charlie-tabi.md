@@ -180,11 +180,24 @@ GROUP BY continent
 ORDER BY AVG(lifeexpectancy) DESC
 
 What are the most common forms of government? (HINT: use count(*))
+SELECT COUNT (governmentform), governmentform  
+FROM country
+GROUP BY governmentform
+ORDER BY COUNT DESC
+(Republic)
 
+How many countries are in North America? (37)
+SELECT continent, COUNT (name)
+FROM country
+GROUP BY continent 
+ORDER BY COUNT 
 
-
-How many countries are in North America?
 What is the total population of all continents?
+SELECT continent, SUM (population)
+FROM country
+GROUP BY continent 
+ORDER BY SUM 
+
 Stretch Challenges
 Which countries have the letter ‘z’ in the name? How many?
 Of the smallest 10 countries by area, which has the biggest gnp? (HINT: Macao)
