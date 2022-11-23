@@ -165,9 +165,18 @@ ORDER BY AVG DESC
 
 Who is the most influential head of state measured by surface area? (HINT: Elisabeth II)
 
-
+SELECT headofstate, SUM(surfacearea)
+FROM country
+GROUP BY headofstate
+ORDER BY SUM DESC
 
 What is the average life expectancy for all continents?
+
+SELECT continent, AVG(lifeexpectancy)
+FROM country
+GROUP BY continent
+ORDER BY AVG DESC
+
 What are the most common forms of government? (HINT: use count(*))
 How many countries are in North America?
 What is the total population of all continents?
