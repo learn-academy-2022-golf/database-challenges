@@ -95,15 +95,68 @@ ORDER BY population desc
 LIMIT 1
 
 Who is the most influential head of state measured by population? (HINT: Jiang Zemin)
+SELECT name, population, headofstate
+FROM country
+ORDER BY population DESC
+
 Subqueries: WITH
 Of the countries with the top 10 gnp, which has the smallest population? (HINT: Canada)
+WITH top_gnp AS (
+SELECT name, gnp, population 
+FROM country
+ORDER BY gnp DESC	
+LIMIT 10
+)
+SELECT name, gnp, population 
+FROM top_gnp
+ORDER BY population
+LIMIT 1
+
 Of the 10 least populated countries with permament residents (a non-zero population), which has the largest surfacearea? (HINT: Svalbard and Jan Mayen)
+WITH least_pop AS (
+SELECT name, population, surfacearea 
+FROM country
+WHERE population !=0	
+ORDER BY population	
+LIMIT 10
+)
+SELECT name, population, surfacearea 
+FROM least_pop
+ORDER BY surfacearea DESC
+LIMIT 10
+
 Aggregate Functions: GROUP BY
 Which region has the highest average gnp? (HINT: North America)
+SELECT continent, AVG(gnp)
+FROM country
+GROUP BY continent
+ORDER BY AVG(gnp) DESC
+LIMIT 1
+
 Who is the most influential head of state measured by surface area? (HINT: Elisabeth II)
+SELECT SUM(surfacearea), headofstate,
+FROM country
+GROUP BY headofstate
+ORDER BY SUM(surfacearea) DESC
+
 What is the average life expectancy for all continents?
+SELECT AVG(lifeexpectancy), continent
+FROM country
+GROUP BY continent
+ORDER BY AVG(lifeexpectancy) DESC
+
 What are the most common forms of government? (HINT: use count(*))
+SELECT governmentform, COUNT (*)
+FROM country
+GROUP BY governmentform
+ORDER BY count DESC
+
 How many countries are in North America?
+SELECT continent, COUNT (*)
+FROM country
+WHERE continent = 'North America'
+GROUP BY continent 
+
 What is the total population of all continents?
 Stretch Challenges
 Which countries have the letter ‘z’ in the name? How many?
