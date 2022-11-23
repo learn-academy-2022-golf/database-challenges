@@ -164,9 +164,10 @@ Who is the most influential head of state measured by surface area? (HINT: Elisa
 
 
 
-
-
 What is the average life expectancy for all continents?
+
+
+
 What are the most common forms of government? (HINT: use count(*))
 How many countries are in North America?
 What is the total population of all continents?
