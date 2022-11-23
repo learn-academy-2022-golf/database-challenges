@@ -36,12 +36,46 @@ AND population < 30e6
 
 
 Which countries are something like a republic? (HINT: Are there 122 or 143?)
+
+SELECT name
+FROM country
+WHERE governmentform
+LIKE '%epublic'
+
 Which countries are some kind of republic and achieved independence after 1945? (HINT: 92 entries)
+
+SELECT name
+FROM country
+WHERE governmentform 
+LIKE '%epublic'
+AND indepyear > 1945 
+
 Which countries achieved independence after 1945 and are not some kind of republic? (HINT: 27 entries)
+
+SELECT name, indepyear, governmentform
+FROM country
+WHERE governmentform != 'Republic'
+AND indepyear > 1945 
+LIMIT 27
+
 ORDER BY
 Which fifteen countries have the lowest life expectancy? (HINT: starts with Zambia, ends with Sierra Leonne)
+
+SELECT name
+FROM country
+-- WHERE governmentform IN ('Zambia', 'Sierra Leonne')
+ORDER BY lifeexpectancy
+
 Which fifteen countries have the highest life expectancy? (HINT: starts with Andorra, ends with Spain)
+
+SELECT name
+FROM country
+-- WHERE governmentform IN ('Zambia', 'Sierra Leonne')
+ORDER BY lifeexpectancy DESC
+
 Which five countries have the lowest population density (density = population / surfacearea)? (HINT: starts with Greenland)
+
+
 Which countries have the highest population density?(HINT: starts with Macao)
 Which is the smallest country by area? (HINT: .4)
 Which is the smallest country by population? (HINT: 50)?
