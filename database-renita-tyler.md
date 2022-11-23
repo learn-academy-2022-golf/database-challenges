@@ -158,11 +158,71 @@ WHERE continent = 'North America'
 GROUP BY continent 
 
 What is the total population of all continents?
+SELECT continent, SUM(population)
+FROM country
+GROUP BY continent 
+ORDER BY SUM(population)
+
 Stretch Challenges
+
 Which countries have the letter ‘z’ in the name? How many?
+
+
 Of the smallest 10 countries by area, which has the biggest gnp? (HINT: Macao)
+
+WITH smallest_countries AS (
+	SELECT name, surfacearea, gnp
+	FROM country
+	ORDER BY surfacearea 
+	LIMIT 10
+	)
+SELECT name, surfacearea, gnp
+FROM smallest_countries
+ORDER BY gnp desc
+LIMIT 1;
+
 Of the smallest 10 countries by population, which has the biggest per capita gnp?
+WITH smallest_countries AS (
+	SELECT name, population, gnp
+	FROM country
+	WHERE population > 0
+	AND gnp > 0
+	order by population
+	limit 10
+	)
+SELECT name, population, gnp
+FROM smallest_countries
+ORDER BY gnp desc
+LIMIT 1;
+
+
 Of the biggest 10 countries by area, which has the biggest gnp?
+WITH biggest_countries AS (
+	SELECT name, surfacearea, gnp
+	FROM country
+	order by surfacearea desc
+	limit 10
+	)
+SELECT name, surfacearea, gnp
+FROM biggest_countries
+ORDER BY gnp desc
+limit 1
+
 Of the biggest 10 countries by population, which has the biggest per capita gnp?
+
+WITH biggest_countries AS (
+	SELECT name, population, gnp
+	FROM country
+	order by population desc
+	limit 10
+	)
+SELECT name, population, gnp
+FROM biggest_countries
+ORDER BY gnp desc
+limit 1
+
+
 What is the sum of surface area of the 10 biggest countries in the world? The 10 smallest?
+
+
 What year is this country database from? Cross reference various pieces of information to determine the age of this database.
