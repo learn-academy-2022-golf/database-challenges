@@ -1,9 +1,9 @@
 WHERE
 What is the population of the US? (HINT: 278357000)
 
--SELECT name, country, population
+-SELECT name, surfacearea
 -FROM country
--WHERE population = 278357000
+-WHERE name = 'United States'
 
 What is the area of the US? (HINT: 9.36352e+06)
 
@@ -83,20 +83,106 @@ Which countries have the highest population density?(HINT: starts with Macao)
 -ORDER BY density DESC
 
 Which is the smallest country by area? (HINT: .4)
+
+-SELECT name, surfacearea
+-FROM country
+-ORDER BY surfacearea
+-LIMIT 1
+
 Which is the smallest country by population? (HINT: 50)?
+
+-SELECT name, population
+-FROM country
+-WHERE population != 0
+-ORDER BY population
+-LIMIT 1
+
 Which is the biggest country by area? (HINT: 1.70754e+07)
+
+-SELECT name, surfacearea
+-FROM country
+-ORDER BY surfacearea desc
+-LIMIT 1
+
 Which is the biggest country by population? (HINT: 1277558000)
+
+-SELECT name, population
+-FROM country
+-ORDER BY population desc
+-LIMIT 1
+
 Who is the most influential head of state measured by population? (HINT: Jiang Zemin)
-Subqueries: WITH
-Of the countries with the top 10 gnp, which has the smallest population? (HINT: Canada)
+
+-SELECT name, population, headofstate
+-FROM country
+-ORDER BY population DESC
+
+- Subqueries: WITH
+
+  Of the countries with the top 10 gnp, which has the smallest population? (HINT: Canada)
+
+-SELECT name, gnp, population
+-FROM country
+-ORDER BY gnp DESC
+-LIMIT 10)
+-SELECT name, gnp, population
+-FROM top_gnp
+-ORDER BY population
+-LIMIT 1
+
 Of the 10 least populated countries with permament residents (a non-zero population), which has the largest surfacearea? (HINT: Svalbard and Jan Mayen)
+
+WITH least_pop AS(
+-SELECT name, population, surfacearea
+-FROM country
+-WHERE population !=0
+-ORDER BY population
+-LIMIT 10)
+
 Aggregate Functions: GROUP BY
 Which region has the highest average gnp? (HINT: North America)
+
+-SELECT continent, AVG(gnp)
+-FROM country
+-GROUP BY continent
+-ORDER BY AVG(gnp) DESC
+-LIMIT 1
+
 Who is the most influential head of state measured by surface area? (HINT: Elisabeth II)
+
+-SELECT SUM(surfacearea), headofstate,
+-FROM country
+-GROUP BY headofstate
+-ORDER BY SUM(surfacearea) DESC
+
 What is the average life expectancy for all continents?
+
+-SELECT AVG(lifeexpectancy), continent
+-FROM country
+-GROUP BY continent
+-ORDER BY AVG(lifeexpectancy) DESC
+
 What are the most common forms of government? (HINT: use count(\*))
+
+-SELECT governmentform, COUNT (\*)
+-FROM country
+-GROUP BY governmentform
+-ORDER BY count DESC
+
 How many countries are in North America?
+
+-SELECT continent, COUNT (\*)
+-FROM country
+-WHERE continent = 'North America'
+-GROUP BY continent
+
 What is the total population of all continents?
+
+-SELECT continent, SUM(population)
+-FROM country
+-GROUP BY continent
+-ORDER BY SUM(population)
+
 Stretch Challenges
 Which countries have the letter ‘z’ in the name? How many?
 Of the smallest 10 countries by area, which has the biggest gnp? (HINT: Macao)
